@@ -204,6 +204,27 @@ function attemptGetPromotions(){
 	}
 }
 
+function attemptGetPromotionsManager($username){
+	$conn = connectionToDataBase();
+
+	if ($conn != null){
+
+		$sql = "SELECT idPromotions, rName, name, descriptions, imageURL FROM restaurant_information, promotions WHERE restaurant_information.rUsername = '$username' AND restaurant_information.rUsername = promotions.rUsername";
+		$result = $conn->query($sql);
+		$commentsBox = array();
+		while($row = $result->fetch_assoc()) {
+			$response = array('idPromotions' => $row['idPromotions'], 'rName' => $row['rName'], 'name' => $row['name'], 'descriptions' => $row['descriptions'], 'imageURL' => $row['imageURL']);  
+			array_push($commentsBox, $response);
+		}
+		$conn -> close();
+		return array("status" => "SUCCESS", "arrayPromotions" => $commentsBox);
+	}
+	else{
+		$conn -> close();
+		return array("status" => $result);
+	}
+}
+
 function attemptGetCustomersReviews(){
 	$conn = connectionToDataBase();
 
@@ -298,6 +319,33 @@ function attemptAddPromotion($username, $name, $description, $initDay, $initMont
 		$conn -> close();
 		return array("status" => "CONNECTION WITH DB WENT WRONG");
 	}
+}
+
+function attemptDeletePromotion($username, $id){
+	$conn = connectionToDataBase();
+
+	if ($conn != null){
+
+		$last_id = $conn->insert_id;
+
+		$sql = "DELETE FROM promotions WHERE idPromotions = '$id'";	
+
+		$result = $conn->query($sql);
+
+		if ($result) {
+			$conn -> close();
+			return array("status" => "SUCCESS");
+		}
+		else{
+			$conn -> close();
+			return array("status" => "ERROR");
+		}
+	}
+	else{
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+
 }
 
 

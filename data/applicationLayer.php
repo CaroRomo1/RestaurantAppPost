@@ -30,6 +30,8 @@ switch($action){
 		break;
 	case "ADDPROMOTIONSMANAGER" : addPromotionsManagerFunction();
 		break;
+	case "DELETEPROMOTIONSMANAGER" : deletePromotionsManagerFunction();
+		break;
 }
 
 function loginFunction(){
@@ -226,7 +228,8 @@ function loadPromotionsManagerFunction(){
 
 	if(isset($_SESSION['user']) && time() - $_SESSION['loginTime'] < 1800){ 
 
-		$result = attemptGetPromotions();
+		$username = $_SESSION['user'];
+		$result = attemptGetPromotionsManager($username);
 
 		if ($result["status"] == "SUCCESS"){
 			echo json_encode($result["arrayPromotions"]);
@@ -332,6 +335,31 @@ function addPromotionsManagerFunction(){
 
 		if ($result["status"] == "SUCCESS"){
 			echo json_encode(array( "message" => "Promotion added succesfully!"));
+		}	
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 410 Session has expired');
+		die("Session has expired");
+	}
+
+}
+
+function deletePromotionsManagerFunction(){
+	session_start();
+
+	if(isset($_SESSION['user']) && time() - $_SESSION['loginTime'] < 1800){ 
+
+		$username = $_SESSION['user'];
+		$id = $_POST["id"];
+
+		$result = attemptDeletePromotion($username, $id);
+
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode(array( "message" => "Promotion deleted succesfully!"));
 		}	
 		else{
 			header('HTTP/1.1 500' . $result["status"]);
