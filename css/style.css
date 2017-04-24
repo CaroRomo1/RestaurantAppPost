@@ -1,0 +1,42 @@
+
+.form-group{
+    margin-bottom: 65px;
+}
+
+.col-md-6 {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.login_content form div a {
+    font-size: 16px;
+    margin: 10px 15px 0 0;
+}
+
+#dob-day, #init-day, #expire-day {
+    width: 10%;
+    float: left;
+}
+
+#dob-month, #init-month, #expire-month {
+    width: 20%;
+    float: left;
+}
+
+#dob-year, #init-year, #expire-year {
+    width: 18%;
+}
+
+#country_select{
+    width: 48%;
+}
+
+#open-hour , #open-min, #close-hour {
+    width: 18%;
+    float: left;
+}
+
+#close-min {
+    width: 18%;
+}
