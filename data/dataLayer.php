@@ -155,15 +155,27 @@ function attemptGetRestaurants(){
 
 	if ($conn != null){
 
-		$sql = "SELECT rName, address, webpage, maxCapacity, AVG(rating) AS rating FROM restaurant_information, restaurant_reviews WHERE restaurant_reviews.rUsername = restaurant_information.rUsername";
+		$sql = "SELECT rName, address, webpage, maxCapacity, AVG(rating) AS rating FROM restaurant_information, restaurant_reviews WHERE restaurant_reviews.rUsername = restaurant_information.rUsername GROUP BY rName, address, webpage, maxCapacity";
 		$result = $conn->query($sql);
-		$commentsBox = array();
-		while($row = $result->fetch_assoc()) {
-			$response = array('rName' => $row['rName'], 'address' => $row['address'], 'webpage' => $row['webpage'], 'maxCapacity' => $row['maxCapacity'], 'rating' => $row['rating']);  
-			array_push($commentsBox, $response);
+
+		# The current user exists
+		if ($result->num_rows > 0)
+		{
+			$commentsBox = array();
+			while($row = $result->fetch_assoc()) {
+				$response = array('rName' => $row['rName'], 'address' => $row['address'], 'webpage' => $row['webpage'], 'maxCapacity' => $row['maxCapacity'], 'rating' => $row['rating']);  
+				array_push($commentsBox, $response);
+			}
+			$conn -> close();
+			return array("status" => "SUCCESS", "arrayRestaurants" => $commentsBox);
 		}
-		$conn -> close();
-		return array("status" => "SUCCESS", "arrayRestaurants" => $commentsBox);
+		else
+		{
+			# The user doesn't exists in the Database
+			$conn->close();
+			return array("status" => "The user doesn't exists in the Database");
+		}
+		
 	}
 	else{
 		$conn -> close();
