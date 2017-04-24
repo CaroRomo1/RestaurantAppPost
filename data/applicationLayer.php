@@ -20,11 +20,15 @@ switch($action){
 		break;
 	case "LOADPROMOTIONS" : loadPromotionsFunction();
 		break;
+	case "LOADPROMOTIONSMANAGER" : loadPromotionsManagerFunction();
+		break;
 	case "GETCUSTOMERSREVIEWS" : getCustomersReviewsFunctions();
 		break;
 	case "GETRESTAURANTSREVIEWS" : getRestaurantsReviews();
 		break;
 	case "INSRTUSERREVIEW" : insertUserReviewFunction();
+		break;
+	case "ADDPROMOTIONSMANAGER" : addPromotionsManagerFunction();
 		break;
 }
 
@@ -217,6 +221,27 @@ function loadPromotionsFunction(){
 	}
 }
 
+function loadPromotionsManagerFunction(){
+	session_start();
+
+	if(isset($_SESSION['user']) && time() - $_SESSION['loginTime'] < 1800){ 
+
+		$result = attemptGetPromotions();
+
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result["arrayPromotions"]);
+		}
+		else {
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 410 Session has expired');
+		die("Session has expired");
+	}
+}
+
 function getCustomersReviewsFunctions(){
 	session_start();
 
@@ -286,6 +311,40 @@ function insertUserReviewFunction(){
 	}
 
 }
+
+function addPromotionsManagerFunction(){
+	session_start();
+
+	if(isset($_SESSION['user']) && time() - $_SESSION['loginTime'] < 1800){ 
+
+		$username = $_SESSION['user'];
+		$name = $_POST["name"];
+		$description = $_POST["description"];
+		$initDay = $_POST["initDay"];
+		$initMonth = $_POST["initMonth"];
+		$initYear = $_POST["initYear"];
+		$expireDay = $_POST["expireDay"];
+		$expireMonth = $_POST["expireMonth"];
+		$expireYear = $_POST["expireYear"];
+		$imageURL = $_POST["imageURL"];
+
+		$result = attemptAddPromotion($username, $name, $description, $initDay, $initMonth, $initYear, $expireDay, $expireMonth, $expireYear, $imageURL);
+
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode(array( "message" => "Promotion added succesfully!"));
+		}	
+		else{
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 410 Session has expired');
+		die("Session has expired");
+	}
+
+}
+
 
 
 

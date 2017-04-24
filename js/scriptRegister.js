@@ -54,7 +54,7 @@ $(document).ready(function(){
 				contentType : "application/x-www-form-urlencoded",
 				success : function(jsonResponse) {
 					alert(jsonResponse.message);
-					window.location.replace("home.php");
+					window.location.replace("homepage_consumer.php");
 				},
 				error : function(errorMessage){
 					alert(errorMessage.responseText);
@@ -115,7 +115,7 @@ $(document).ready(function(){
 					window.location.replace("homepage_restaurant.php");
 				},
 				error : function(errorMessage){
-					alert(errorMessage.responseText);
+					alert("errorMessage.responseText");
 				}
 			});
 		}

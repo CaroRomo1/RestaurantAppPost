@@ -215,17 +215,17 @@
                           <select name="close-min" id="close-min"  class="form-control">
                             <option value="">Min</option>
                             <option value="00">00</option>
-                            <option value="05">01</option>
-                            <option value="10">02</option>
-                            <option value="15">03</option>
-                            <option value="20">04</option>
-                            <option value="25">05</option>
-                            <option value="30">06</option>
-                            <option value="35">07</option>
-                            <option value="40">08</option>
-                            <option value="45">09</option>
-                            <option value="50">10</option>
-                            <option value="55">11</option>
+                            <option value="05">05</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="35">35</option>
+                            <option value="40">40</option>
+                            <option value="45">45</option>
+                            <option value="50">50</option>
+                            <option value="55">55</option>
                           </select>
                         </div>
                       </div>
@@ -270,7 +270,7 @@
     </div>
 
     <!-- jQuery -->
-    <script src="gentelella/vendors/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
     <!-- Bootstrap -->
     <script src="gentelella/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->

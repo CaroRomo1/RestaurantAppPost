@@ -262,6 +262,32 @@ function attemptAddReviews($username, $review, $rating, $name){
 	}
 }
 
+function attemptAddPromotion($username, $name, $description, $initDay, $initMonth, $initYear, $expireDay, $expireMonth, $expireYear, $imageURL){
+	$conn = connectionToDataBase();
+
+	if ($conn != null){
+
+		$last_id = $conn->insert_id;
+
+		$sql = "INSERT INTO promotions (idPromotions, rUsername, name, descriptions, imageURL, startDay, startMonth, startYear, endDay, endMonth, endYear) VALUES ('$last_id','$username', '$name', '$description', '$imageURL' ,'$initDay', '$initMonth', '$initYear', '$expireDay', '$expireMonth', '$expireYear')";	
+
+		$result = $conn->query($sql);
+
+		if ($result) {
+			$conn -> close();
+			return array("status" => "SUCCESS");
+		}
+		else{
+			$conn -> close();
+			return array("status" => "ERROR");
+		}
+	}
+	else{
+		$conn -> close();
+		return array("status" => "CONNECTION WITH DB WENT WRONG");
+	}
+}
+
 
 
 ?>
