@@ -23,7 +23,7 @@
   <link href="gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
   <link href="gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
   <link href="gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-  <link href="gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+  <!link href="gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom Theme Style -->
   <link href="gentelella/build/css/custom.min.css" rel="stylesheet">
@@ -185,7 +185,7 @@
 <script  src="gentelella/vendors/datatables.net-keytable/js/dataTables.keyTable.js"></script>
 <script  src="gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.js"></script>
 <script  src="gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-<script  src="gentelella/vendors/datatables.net-scroller/js/dataTables.scroller.js"></script>
+<!script  src="gentelella/vendors/datatables.net-scroller/js/dataTables.scroller.js"><!/script>
 <script  src="gentelella/vendors/jszip/dist/jszip.js"></script>
 <script  src="gentelella/vendors/pdfmake/build/pdfmake.js"></script>
 <script  src="gentelella/vendors/pdfmake/build/vfs_fonts.js"></script>
