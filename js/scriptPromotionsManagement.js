@@ -16,7 +16,8 @@ $(document).ready(function(){
 				newHtml += jsonResponse[i].imageURL;
 				newHtml += '" alt="image" /> <div class="mask"><p>';
 				newHtml += jsonResponse[i].name;
-				newHtml += '</p> <div class="tools tools-bottom"><a href="#"><i class=""></i></a><a href="edit_promotion.php"><i class="fa fa-pencil"></i></a><a href="#"><i class=""></i></a> </div></div></div><div class="caption"><p>';
+				newHtml += '</p> <div class="tools tools-bottom"><a href="#"><i class=""></i></a><a href="#" id="' ;
+				newHtml += jsonResponse[i].idPromotions + '" class="delete_promotion" ><i  class="fa fa-pencil"></i></a><a href="#"><i class=""></i></a> </div></div></div><div class="caption"><p>';
 				newHtml += jsonResponse[i].descriptions;
 				newHtml += '</p></div></div></div>';
 			}
@@ -25,8 +26,13 @@ $(document).ready(function(){
 		},
 		error: function(errorMessage){
 			alert(errorMessage.responseText);
-			window.location.replace("index.php");
+			window.location.replace("homepage_restaurant.php");
 		}
+	}); 
+
+
+	$("#cancel_promotions_button").on("click", function(){
+		window.location.replace("promotions_management.php");
 	});
 
 	$("#add_button_promotions").on("click", function(){
@@ -68,6 +74,33 @@ $(document).ready(function(){
 			}
 		});
 
+	});
+
+	$(".delete_promotion").on("click", function(){
+		var txt;
+		var r = confirm("Do you want to delete your promotion?");
+		if (r == true) {
+			var jsonToSend = {
+				"action" : "DELETEPROMOTIONSMANAGER",
+				"id" : this.id
+			};
+			$.ajax({
+				url : "data/applicationLayer.php",
+				type : "POST",
+				data : jsonToSend, 
+				dataType : "json",
+				contentType : "application/x-www-form-urlencoded",
+				success: function(jsonResponse){
+					console.log(jsonResponse);
+					alert(jsonResponse.message);	
+					window.location.replace("promotions_management.php");		
+				},
+				error: function(errorMessage){
+					alert(errorMessage.responseText);
+					window.location.replace("homepage_restaurant.php");
+				}
+			}); 
+		} 
 	});
 
 });
