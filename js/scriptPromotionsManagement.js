@@ -76,7 +76,7 @@ $(document).ready(function(){
 
 	});
 
-	$(".delete_promotion").on("click", function(){
+	$(document).on('click', ".delete_promotion", function(){
 		var txt;
 		var r = confirm("Do you want to delete your promotion?");
 		if (r == true) {
