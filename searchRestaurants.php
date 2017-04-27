@@ -23,7 +23,7 @@
   <link href="gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
   <link href="gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
   <link href="gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-  <link href="gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+  <!link href="gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom Theme Style -->
   <link href="gentelella/build/css/custom.min.css" rel="stylesheet">
@@ -62,7 +62,6 @@
                 <li id="homapage_list_consumer" ><a><i class="fa fa-home"  ></i> Homepage </a> </li>
                 <li id="restaurant_reviews_list_consumer"><a><i class="fa fa-edit"></i> Restaurants Reviews </a> </li>
                 <li id="promotions_list_consumer"><a><i class="fa fa-star"></i> Promotions </a></li>
-                <li id="restaurant_profile_consumer"><a><i class="fa fa-cutlery"></i> Restaurants Profile </a> </li>
               </ul>
             </div>
           </div>
@@ -82,7 +81,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">John Doe
+                  <img src="images/img.jpg" alt="">User
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -101,11 +100,14 @@
       <div class="right_col" role="main">
         <div class="">
           <div class="page-title">
+            <div class="title_left">
+            <h3>Restaurants</h3>
+              </div>
 
             <div class="title_right">
               <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
+                  <input id="searchText" type="text" class="form-control" placeholder="Search for...">
                   <span class="input-group-btn">
                     <button id= "searchBox" class="btn btn-default" type="button">Go!</button>
                   </span>
@@ -120,7 +122,6 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Restaurants</small></h2>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -163,7 +164,7 @@
 <!-- jQuery -->
 <script  src="gentelella/vendors/jquery/dist/jquery.min.js"></script>
 <script async type="text/javascript" src="js/scriptSideMenu_Consumer.js"></script>
-<script async type="text/javascript" src="js/scriptSearch.js"></script>
+<script async type="text/javascript" src="js/scriptSearchRestaurants.js"></script>
 
 
 <!-- Bootstrap -->
@@ -186,7 +187,7 @@
 <script  src="gentelella/vendors/datatables.net-keytable/js/dataTables.keyTable.js"></script>
 <script  src="gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.js"></script>
 <script  src="gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-<script  src="gentelella/vendors/datatables.net-scroller/js/dataTables.scroller.js"></script>
+<!script  src="gentelella/vendors/datatables.net-scroller/js/dataTables.scroller.js"><!/script>
 <script  src="gentelella/vendors/jszip/dist/jszip.js"></script>
 <script  src="gentelella/vendors/pdfmake/build/pdfmake.js"></script>
 <script  src="gentelella/vendors/pdfmake/build/vfs_fonts.js"></script>

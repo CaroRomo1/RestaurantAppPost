@@ -1,15 +1,15 @@
 $(document).ready(function(){
-    var jsonToSend ={
-        "action" : "SEARCH_RESULTS"
+    
+    var jsonToSend = {
+        "action" : "LOADSEARCHRESTAURANTS"
     };
-
     $.ajax({
         url : "data/applicationLayer.php",
         type : "POST",
-        data : jsonToSend,
+        data : jsonToSend, 
         dataType : "json",
         contentType : "application/x-www-form-urlencoded",
-        success : function(jsonResponse){
+        success: function(jsonResponse){            
             var newHtml = "";
             for (var i = 0; i < jsonResponse.length; i++){
                 newHtml += '<tr> <td> <th><input type="checkbox" id="check-all" class="flat"></th></td>';
@@ -24,44 +24,16 @@ $(document).ready(function(){
             }
             $("#datatable-checkbox").append(newHtml);
         },
-        error : function(errorMessage){
+        error: function(errorMessage){
             alert(errorMessage.responseText);
-            window.location.replace("index.php");
+            //window.location.replace("index.php");
         }
-
-    });
-
-    $("#searchTable").on("click", ".requestButton", function(){
-        var username = $(this).parent().parent().get(0).cells[0].innerHTML;
-
-        console.log(username);
-
-        var jsonToSend ={
-            "action" : "SEND_REQUEST",
-            "friendUsername" : username
-        };
-        $.ajax({
-            url : "data/applicationLayer.php",
-            type : "POST",
-            data : jsonToSend,
-            dataType : "json",
-            contentType : "application/x-www-form-urlencoded",
-            success : function(jsonResponse){
-                alert(jsonResponse.message);
-                window.location.replace("search.php");
-            },
-            error : function(errorMessage){
-                console.log(errorMessage.responseText);
-            }
-
-        });
-
     });
 
     $("#searchBox").on("click", function(){
         var jsonToSend ={
-            "action" : "SEARCH",
-            "search" : $("#searchBox").val()
+            "action" : "SAVESEARCH",
+            "search" : $("#searchText").val()
         };
 
         $.ajax({
@@ -71,7 +43,7 @@ $(document).ready(function(){
             dataType : "json",
             contentType : "application/x-www-form-urlencoded",
             success : function(jsonResponse){
-                window.location.replace("search.php");
+                window.location.replace("searchRestaurants.php");
             },
             error : function(errorMessage){
                 alert(errorMessage.responseText);
@@ -82,4 +54,5 @@ $(document).ready(function(){
     });
 
 });
+
 

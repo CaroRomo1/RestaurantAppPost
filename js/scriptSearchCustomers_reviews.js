@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var jsonToSend = {
-        "action" : "GETCUSTOMERSREVIEWS"
+        "action" : "SEARCHCUSTOMERSREVIEWS"
     };
 
     $.ajax({

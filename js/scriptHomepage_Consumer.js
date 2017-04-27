@@ -32,8 +32,8 @@ $(document).ready(function(){
 
 	$("#searchBox").on("click", function(){
         var jsonToSend ={
-            "action" : "SEARCH",
-            "search" : $("#searchBox").val()
+            "action" : "SAVESEARCH",
+            "search" : $("#searchText").val()
         };
 
         $.ajax({
@@ -43,7 +43,7 @@ $(document).ready(function(){
             dataType : "json",
             contentType : "application/x-www-form-urlencoded",
             success : function(jsonResponse){
-                window.location.replace("search.php");
+                window.location.replace("searchRestaurants.php");
             },
             error : function(errorMessage){
                 alert(errorMessage.responseText);

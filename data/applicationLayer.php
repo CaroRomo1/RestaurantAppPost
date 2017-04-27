@@ -32,6 +32,14 @@ switch($action){
 		break;
 	case "DELETEPROMOTIONSMANAGER" : deletePromotionsManagerFunction();
 		break;
+	case "SAVESEARCH" : attemptSaveSearch();
+		break;
+	case "LOADSEARCHRESTAURANTS" : loadSearchRestaurantsFunction();
+		break;
+	case "SEARCHRESTAURANTSREVIEWS" : searchRestaurantsReviews();
+		break;
+	case "SEARCHCUSTOMERSREVIEWS" : searchCustomersReviewsFunctions();
+		break;
 }
 
 function loginFunction(){
@@ -374,7 +382,91 @@ function deletePromotionsManagerFunction(){
 
 }
 
+function attemptSaveSearch(){
+	session_start();
 
+	if(isset($_SESSION['user']) && time() - $_SESSION['loginTime'] < 1800) 
+	{
+		$search = $_POST["search"];
 
+		setcookie("search", "$search", time()+300, "/", "", 0);
+		echo json_encode(array("message" => "Success"));
+	}
+	else
+	{
+		header('HTTP/1.1 410 Expired Session');
+		die('Expired Session');
+	}
+}
+
+function loadSearchRestaurantsFunction(){
+	session_start();
+
+	if(isset($_SESSION['user']) && time() - $_SESSION['loginTime'] < 1800) 
+	{
+		$search = $_COOKIE["search"];
+
+		$result = searchResult($search);
+
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result["response"]);
+		}	
+		else{
+			header('HTTP/1.1 410 ' . $result["status"]);
+			die($result["status"]);
+		}	
+	}
+	else
+	{
+		header('HTTP/1.1 410 Expired Session');
+		die('Expired Session');
+	}
+}
+
+function searchRestaurantsReviews(){
+	session_start();
+
+	if(isset($_SESSION['user']) && time() - $_SESSION['loginTime'] < 1800){ 
+
+		$search = $_COOKIE["search"];
+
+		$result = attemptSearchRestaurantsReviews($search);
+
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result["response"]);
+		}
+		else {
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 410 Session has expired');
+		die("Session has expired");
+	}
+}
+
+function searchCustomersReviewsFunctions(){
+	session_start();
+
+	if(isset($_SESSION['user']) && time() - $_SESSION['loginTime'] < 1800){ 
+
+		$search = $_COOKIE["search"];
+		$username = $_SESSION['user'];
+		$result = attemptSearchCustomersReviews($username, $search);
+
+		if ($result["status"] == "SUCCESS"){
+			echo json_encode($result["arrayCustomersReviews"]);
+		}
+		else {
+			header('HTTP/1.1 500' . $result["status"]);
+			die($result["status"]);
+		}
+	}
+	else {
+		header('HTTP/1.1 410 Session has expired');
+		die("Session has expired");
+	}
+}
 
 ?>

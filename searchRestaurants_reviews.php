@@ -29,7 +29,7 @@
 </head>
 
 <body class="nav-md">
-<!--?php
+<!-- ?php
     $cookie_name = "search";
     if(!isset($_COOKIE[$cookie_name])) {
         echo "Cookie named '" . $cookie_name . "' is not set!";
@@ -88,7 +88,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="gentelella/production/images/img.jpg" alt="">User
+                  <img src="images/img.jpg" alt="">User
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -116,7 +116,7 @@
                 <div class="input-group">
                   <input id="searchText" type="text" class="form-control" placeholder="Search for...">
                   <span class="input-group-btn">
-                    <button id= "searchBox" class="btn btn-default" type="button">Go!</button>
+                    <button id="searchBox" class="btn btn-default" type="button">Go!</button>
                   </span>
                 </div>
               </div>
@@ -204,9 +204,11 @@
   <!-- jQuery -->
   <script src="gentelella/vendors/jquery/dist/jquery.min.js"></script>
 
-  <!-- js own scripts -->
-    <script type="text/javascript" src="js/scriptSideMenu_Consumer.js"></script>
-    <script type="text/javascript" src="js/scriptRestaurants_Reviews.js"></script>
+   <!-- js own scripts -->
+  <script type="text/javascript" src="js/scriptSideMenu_Consumer.js"></script>
+  <script type="text/javascript" src="js/scriptSearchRestaurants_reviews.js"></script>
+
+
 
   <!-- Bootstrap -->
   <script src="gentelella/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -236,5 +238,6 @@
   <!-- Custom Theme Scripts -->
   <!script src="gentelella/build/js/custom.min.js"><!/script>
 
+ 
 </body>
 </html>

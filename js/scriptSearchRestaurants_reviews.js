@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var jsonToSend ={
-        "action" : "GETRESTAURANTSREVIEWS"
+        "action" : "SEARCHRESTAURANTSREVIEWS"
     };
 
     $.ajax({

@@ -74,7 +74,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">John Doe
+                  <img src="gentelella/production/images/img.jpg" alt="">User
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -120,7 +120,14 @@
                           <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar">
                         </div>
                       </div>
-                      <h3>Carls Jr.</h3>
+                      <h3>
+                      <?php
+                        session_start();
+                        if(isset($_SESSION["user"])) {
+                            echo $_SESSION["user"];
+                        } 
+                      ?>
+                      </h3>
 
                       <ul class="list-unstyled user_data">
                         <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA

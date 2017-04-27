@@ -186,6 +186,6 @@
 
     <!-- js own scripts -->
     <script type="text/javascript" src="js/scriptSideMenu_Manager.js"></script>
-    <script type="text/javascript" src="js/scriptCustomer_Reviews.js"></script>
+    <script type="text/javascript" src="js/scriptSearchCustomers_reviews.js"></script>
   </body>
 </html>

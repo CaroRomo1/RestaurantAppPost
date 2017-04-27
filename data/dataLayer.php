@@ -345,9 +345,89 @@ function attemptDeletePromotion($username, $id){
 		$conn -> close();
 		return array("status" => "CONNECTION WITH DB WENT WRONG");
 	}
-
 }
 
+
+	function searchResult($search)
+	{
+		$conn = connectionToDataBase();
+
+		if ($conn != null)
+		{
+			$sql = "
+				SELECT rName, address, webpage, maxCapacity, AVG(rating) AS rating 
+				FROM restaurant_information, restaurant_reviews 
+				WHERE restaurant_reviews.rUsername = restaurant_information.rUsername AND (rName LIKE '%$search%') 
+				GROUP BY rName, address, webpage, maxCapacity";
+
+			$result = $conn->query($sql);
+
+			# The current user exists
+			if ($result->num_rows > 0)
+			{
+				$commentsBox = array();
+				while($row = $result->fetch_assoc()) {
+					$response = array('rName' => $row['rName'], 'address' => $row['address'], 'webpage' => $row['webpage'], 'maxCapacity' => $row['maxCapacity'], 'rating' => $row['rating']);  
+					array_push($commentsBox, $response);
+				}
+				$conn -> close();
+				return array("status" => "SUCCESS", "response" => $commentsBox);
+			}
+			else
+			{
+				# The user doesn't exists in the Database
+				$conn->close();
+				return array("status" => "The user doesn't exists in the Database");
+			}
+			
+		}
+		else{
+			$conn -> close();
+			return array("status" => "CONNECTION WITH DB WENT WRONG");
+		}
+	}
+
+	function attemptSearchRestaurantsReviews($search){
+		$conn = connectionToDataBase();
+
+		if ($conn != null){
+
+			$sql = "SELECT rName, username, reviewText, rating FROM restaurant_information, restaurant_reviews WHERE restaurant_information.rUsername = restaurant_reviews.rUsername AND (username LIKE '%$search%' OR rName LIKE '%$search%')";
+			$result = $conn->query($sql);
+			$commentsBox = array();
+			while($row = $result->fetch_assoc()) {
+				$response = array('rName' => $row['rName'],'username' => $row['username'], 'reviewText' => $row['reviewText'], 'rating' => $row['rating']);  
+				array_push($commentsBox, $response);
+			}
+			$conn -> close();
+			return array("status" => "SUCCESS", "response" => $commentsBox);
+		}
+		else{
+			$conn -> close();
+			return array("status" => $result);
+		}
+	}
+
+	function attemptSearchCustomersReviews($username, $search){
+		$conn = connectionToDataBase();
+
+		if ($conn != null){
+
+			$sql = "SELECT username, reviewText, rating FROM restaurant_information, restaurant_reviews WHERE restaurant_information.rUsername = restaurant_reviews.rUsername AND restaurant_information.rUsername = '$username' AND (username LIKE '%$search%' OR rating LIKE '%$search%')";
+			$result = $conn->query($sql);
+			$commentsBox = array();
+			while($row = $result->fetch_assoc()) {
+				$response = array('username' => $row['username'], 'reviewText' => $row['reviewText'], 'rating' => $row['rating']);  
+				array_push($commentsBox, $response);
+			}
+			$conn -> close();
+			return array("status" => "SUCCESS", "arrayCustomersReviews" => $commentsBox);
+		}
+		else{
+			$conn -> close();
+			return array("status" => $result);
+		}
+	}
 
 
 ?>

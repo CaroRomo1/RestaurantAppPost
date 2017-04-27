@@ -1,3 +1,10 @@
+<?php
+  $cookie_name = "user";
+  $cookie_value = "";
+  if(!isset($_COOKIE[$cookie_name])) {
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -35,7 +42,7 @@
             <form>
               <h1>Login Form</h1>
               <div>
-                <input id="userName" type="text" class="form-control" placeholder="Username" required="" />
+                <input id="userName" type="text" class="form-control" placeholder="Username" required="" <?php echo "value= '" . $_COOKIE[$cookie_name] . "'"?>/>
               </div>
               <div>
                 <input id="password" type="password" class="form-control" placeholder="Password" required="" />
