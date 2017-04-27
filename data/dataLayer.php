@@ -225,12 +225,12 @@ function attemptGetPromotionsManager($username){
 	}
 }
 
-function attemptGetCustomersReviews(){
+function attemptGetCustomersReviews($username){
 	$conn = connectionToDataBase();
 
 	if ($conn != null){
 
-		$sql = "SELECT username, reviewText, rating FROM restaurant_information, restaurant_reviews WHERE restaurant_information.rUsername = restaurant_reviews.rUsername";
+		$sql = "SELECT username, reviewText, rating FROM restaurant_information, restaurant_reviews WHERE restaurant_information.rUsername = restaurant_reviews.rUsername AND restaurant_information.rUsername = '$username'";
 		$result = $conn->query($sql);
 		$commentsBox = array();
 		while($row = $result->fetch_assoc()) {

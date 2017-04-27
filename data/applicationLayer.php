@@ -249,8 +249,9 @@ function getCustomersReviewsFunctions(){
 	session_start();
 
 	if(isset($_SESSION['user']) && time() - $_SESSION['loginTime'] < 1800){ 
-
-		$result = attemptGetCustomersReviews();
+		
+		$username = $_SESSION['user'];
+		$result = attemptGetCustomersReviews($username);
 
 		if ($result["status"] == "SUCCESS"){
 			echo json_encode($result["arrayCustomersReviews"]);
